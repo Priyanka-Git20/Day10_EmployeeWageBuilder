@@ -30,19 +30,19 @@ class CompanyEmpWage1 {
     }
 }
 
-class EmployeeWageBuilderArray1 implements IComputeEmpWage{
+class EmployeeWageBuilderArray1 implements IComputeEmpWage {
     public static final int IS_FULL_TIME = 2;
     public static final int IS_PART_TIME = 1;
 
     private int numOfCompany = 0;
-    private CompanyEmpWage[]companyEmpWageArray;
+    private CompanyEmpWage1[]companyEmpWageArray;
 
     public EmployeeWageBuilderArray1(){
-        companyEmpWageArray = new CompanyEmpWage[5];
+        companyEmpWageArray = new CompanyEmpWage1[5];
     }
 
     public void addCompanyEmpWage(String companyName,int empRatePerHours,int numberOfWorkingDays ,int maximumHoursPerMonth){
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHours, numberOfWorkingDays , maximumHoursPerMonth);
+        companyEmpWageArray[numOfCompany] = new CompanyEmpWage1(companyName, empRatePerHours, numberOfWorkingDays , maximumHoursPerMonth);
         numOfCompany++;
     }
 
@@ -58,7 +58,7 @@ class EmployeeWageBuilderArray1 implements IComputeEmpWage{
         return 0;
     }
 
-    private int  computeEmpWage(CompanyEmpWage companyEmpWage){
+    private int  computeEmpWage(CompanyEmpWage1 companyEmpWage){
         //variables
         int empHours = 0;
         int totalEmpHours= 0;
