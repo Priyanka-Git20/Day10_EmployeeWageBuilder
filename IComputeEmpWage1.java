@@ -1,19 +1,21 @@
 package com.bridgelabz;
 
-public interface IComputeEmpWage {
+import java.util.LinkedList;
+
+public interface IComputeEmpWage1 {
     public void addCompanyEmpWage(String companyName,int empRatePerHours,int numberOfWorkingDays ,int maximumHoursPerMonth);
     public void computeEmpWage();
     public int getTotalWage(String company);
 }
 
-class CompanyEmpWage1 {
+class CompanyEmpWage {
     public final String companyName;
     public  final int empRatePerHours;
     public final int numberOfWorkingDays;
     public final int maximumHoursPerMonth;
     public int totalEmpWage;
 
-    public CompanyEmpWage1(String companyName,int empRatePerHours,int numberOfWorkingDays ,int maximumHoursPerMonth) {
+    public CompanyEmpWage(String companyName,int empRatePerHours,int numberOfWorkingDays ,int maximumHoursPerMonth) {
         this.companyName = companyName;
         this.empRatePerHours = empRatePerHours;
         this.numberOfWorkingDays = numberOfWorkingDays;
@@ -30,26 +32,27 @@ class CompanyEmpWage1 {
     }
 }
 
-class EmployeeWageBuilderArray1 implements IComputeEmpWage {
+class EmployeeWageBuilderArrayList implements IComputeEmpWage1 {
     public static final int IS_FULL_TIME = 2;
     public static final int IS_PART_TIME = 1;
 
     private int numOfCompany = 0;
-    private CompanyEmpWage1[]companyEmpWageArray;
+    private LinkedList<CompanyEmpWage>companyEmpWageList;
 
-    public EmployeeWageBuilderArray1(){
-        companyEmpWageArray = new CompanyEmpWage1[5];
+    public EmployeeWageBuilderArrayList(){
+        companyEmpWageList = new LinkedList<>();
     }
 
     public void addCompanyEmpWage(String companyName,int empRatePerHours,int numberOfWorkingDays ,int maximumHoursPerMonth){
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage1(companyName, empRatePerHours, numberOfWorkingDays , maximumHoursPerMonth);
-        numOfCompany++;
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHours, numberOfWorkingDays , maximumHoursPerMonth);
+        companyEmpWageList.add(companyEmpWage);
     }
 
     public void computeEmpWage (){
-        for (int i = 0; i < numOfCompany; i++){
-            companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+        for (int i = 0; i < companyEmpWageList.size(); i++){
+            CompanyEmpWage companyEmpWage = companyEmpWageList.get(i);
+            companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage);
         }
     }
 
@@ -58,7 +61,7 @@ class EmployeeWageBuilderArray1 implements IComputeEmpWage {
         return 0;
     }
 
-    private int  computeEmpWage(CompanyEmpWage1 companyEmpWage){
+    private int  computeEmpWage(CompanyEmpWage companyEmpWage){
         //variables
         int empHours = 0;
         int totalEmpHours= 0;
@@ -88,10 +91,11 @@ class EmployeeWageBuilderArray1 implements IComputeEmpWage {
     }
 
     public static void main(String[] args) {
-        EmployeeWageBuilderArray1 employeeWageBuilderArray1 = new EmployeeWageBuilderArray1();
-        employeeWageBuilderArray1.addCompanyEmpWage("DMart",20,2,10);
-        employeeWageBuilderArray1.addCompanyEmpWage("Relience",10,4,20);
-        employeeWageBuilderArray1.computeEmpWage();
+        EmployeeWageBuilderArrayList employeeWageBuilderArrayList = new EmployeeWageBuilderArrayList();
+        employeeWageBuilderArrayList.addCompanyEmpWage("DMart",20,2,10);
+        employeeWageBuilderArrayList.addCompanyEmpWage("Relience",10,4,20);
+        employeeWageBuilderArrayList.computeEmpWage();
+
     }
 }
 
